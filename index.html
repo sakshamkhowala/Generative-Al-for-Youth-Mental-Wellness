@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindWell - AI-Powered Mental Wellness Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+    <!-- Crisis Quick Access Button -->
+    <button class="crisis-quick-access btn btn--primary" id="crisisQuickAccess" aria-label="Get immediate crisis support">
+        🆘 Need Help Now?
+    </button>
+
+    <!-- AI Chatbot Widget -->
+    <div class="chatbot-widget" id="chatbotWidget">
+        <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open AI support chat">
+            <span class="chatbot-icon">🤖</span>
+            <span class="chatbot-text">AI Support</span>
+        </button>
+    </div>
+
+    <!-- AI Chatbot Modal -->
+    <div class="chatbot-modal hidden" id="chatbotModal">
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                <div class="chatbot-info">
+                    <div class="chatbot-avatar">🤖</div>
+                    <div class="chatbot-details">
+                        <h3>MindWell AI</h3>
+                        <span class="chatbot-status">Online - Here to help</span>
+                    </div>
+                </div>
+                <button class="chatbot-close" id="chatbotClose" aria-label="Close chat">&times;</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        Hi there! I'm your AI mental health support companion. I'm here to listen, provide resources, and help you with coping strategies. How are you feeling today?
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input-area">
+                <div class="crisis-alert hidden" id="crisisAlert">
+                    <div class="alert-content">
+                        <h4>🚨 Crisis Support Available</h4>
+                        <p>I'm concerned about what you're sharing. Immediate help is available:</p>
+                        <div class="crisis-buttons">
+                            <a href="tel:988" class="btn btn--primary btn--sm">Call 988 (US)</a>
+                            <a href="tel:14416" class="btn btn--primary btn--sm">Call 14416 (India)</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="typing-indicator hidden" id="typingIndicator">
+                    <span>AI is typing...</span>
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <div class="input-container">
+                    <textarea 
+                        class="chatbot-input" 
+                        id="chatbotInput" 
+                        placeholder="Share what's on your mind..."
+                        rows="1"
+                    ></textarea>
+                    <button class="send-button" id="sendButton" aria-label="Send message">
+                        <span>➤</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">MindWell</h1>
+                <nav class="nav">
+                    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#crisis" class="nav-link">Crisis Resources</a></li>
+                        <li><a href="#wellness" class="nav-link">Daily Wellness</a></li>
+                        <li><a href="#coping" class="nav-link">Coping Strategies</a></li>
+                        <li><a href="#professional" class="nav-link">Professional Help</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Section -->
+        <section id="home" class="section section--active">
+            <div class="container">
+                <!-- Welcome Hero -->
+                <div class="hero">
+                    <h1>Welcome to MindWell</h1>
+                    <p class="hero-text">Your AI-powered mental wellness companion. Get instant support, learn coping strategies, and find professional help - all in a safe, judgment-free space.</p>
+                    
+                    <!-- AI Chatbot Highlight -->
+                    <div class="ai-highlight">
+                        <div class="ai-content">
+                            <div class="ai-icon">🤖</div>
+                            <div class="ai-text">
+                                <h3>24/7 AI Support</h3>
+                                <p>Chat with our empathetic AI companion anytime for personalized mental health support and resources</p>
+                                <button class="btn btn--primary" id="startChatBtn">Start Chatting Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Crisis Banner -->
+                    <div class="crisis-banner">
+                        <div class="crisis-content">
+                            <h3>🚨 Need Immediate Help?</h3>
+                            <p>If you're in crisis, help is available 24/7</p>
+                            <div class="crisis-buttons">
+                                <a href="tel:988" class="btn btn--primary">Call 988 (US)</a>
+                                <a href="tel:14416" class="btn btn--primary">Call 14416 (India)</a>
+                                <button class="btn btn--outline" id="viewAllCrisis">View All Resources</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Access Tools -->
+                <div class="quick-tools">
+                    <h2>Quick Wellness Tools</h2>
+                    <div class="tools-grid">
+                        <div class="tool-card card" id="quickBreathing">
+                            <div class="card__body">
+                                <div class="tool-icon">🫁</div>
+                                <h3>Breathing Exercise</h3>
+                                <p>Calm your mind with guided breathing</p>
+                            </div>
+                        </div>
+                        <div class="tool-card card" id="quickGrounding">
+                            <div class="card__body">
+                                <div class="tool-icon">🌱</div>
+                                <h3>5-4-3-2-1 Grounding</h3>
+                                <p>Ground yourself in the present moment</p>
+                            </div>
+                        </div>
+                        <div class="tool-card card" id="quickMood">
+                            <div class="card__body">
+                                <div class="tool-icon">💭</div>
+                                <h3>Mood Check-in</h3>
+                                <p>Track and understand your emotions</p>
+                            </div>
+                        </div>
+                        <div class="tool-card card" id="quickChat">
+                            <div class="card__body">
+                                <div class="tool-icon">🤖</div>
+                                <h3>AI Support Chat</h3>
+                                <p>Talk to our AI companion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Cards -->
+                <div class="nav-cards">
+                    <div class="card nav-card" data-section="wellness">
+                        <div class="card__body">
+                            <div class="nav-card-icon">🌱</div>
+                            <h3>Daily Wellness</h3>
+                            <p>Build healthy habits and practice self-care with our 5 steps to mental wellbeing</p>
+                        </div>
+                    </div>
+                    <div class="card nav-card" data-section="coping">
+                        <div class="card__body">
+                            <div class="nav-card-icon">🧘</div>
+                            <h3>Coping Strategies</h3>
+                            <p>Learn breathing exercises, mindfulness techniques, and stress management tools</p>
+                        </div>
+                    </div>
+                    <div class="card nav-card" data-section="professional">
+                        <div class="card__body">
+                            <div class="nav-card-icon">👥</div>
+                            <h3>Professional Help</h3>
+                            <p>Understand when and how to seek professional mental health support</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Wellness Tip -->
+                <div class="daily-tip card">
+                    <div class="card__body">
+                        <h3>💡 Daily Wellness Tip</h3>
+                        <div id="dailyTipContent">
+                            <h4 id="tipCategory">Sleep</h4>
+                            <p id="tipText">Aim for 8-10 hours of sleep each night</p>
+                            <small id="tipDetails">Create a bedtime routine and avoid screens 1 hour before sleep</small>
+                        </div>
+                        <button class="btn btn--sm btn--outline" id="nextTip">Next Tip</button>
+                    </div>
+                </div>
+
+                <!-- Quick Check-in -->
+                <div class="quick-checkin card">
+                    <div class="card__body">
+                        <h3>How are you feeling today?</h3>
+                        <div class="mood-buttons">
+                            <button class="mood-btn" data-mood="great">😊 Great</button>
+                            <button class="mood-btn" data-mood="good">🙂 Good</button>
+                            <button class="mood-btn" data-mood="okay">😐 Okay</button>
+                            <button class="mood-btn" data-mood="struggling">😔 Struggling</button>
+                            <button class="mood-btn" data-mood="crisis">😰 Crisis</button>
+                        </div>
+                        <div class="mood-response hidden" id="moodResponse">
+                            <p id="moodText"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Crisis Resources Section -->
+        <section id="crisis" class="section">
+            <div class="container">
+                <h1>Crisis Resources</h1>
+                <p class="section-intro">If you're having thoughts of suicide or self-harm, please reach out for help immediately. You deserve support.</p>
+
+                <!-- Emergency Actions -->
+                <div class="emergency-actions card">
+                    <div class="card__body">
+                        <h2>🚨 If You're in Immediate Danger</h2>
+                        <div class="emergency-grid">
+                            <div class="emergency-item">
+                                <h3>Call Emergency Services</h3>
+                                <div class="emergency-buttons">
+                                    <a href="tel:911" class="btn btn--primary">911 (US)</a>
+                                    <a href="tel:112" class="btn btn--primary">112 (India)</a>
+                                </div>
+                            </div>
+                            <div class="emergency-item">
+                                <h3>Crisis Text Line</h3>
+                                <a href="sms:741741?body=HOME" class="btn btn--primary">Text HOME to 741741</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Helplines -->
+                <div class="helplines-grid">
+                    <div class="helpline-category">
+                        <h3>United States</h3>
+                        <div class="helpline-card card">
+                            <div class="card__body">
+                                <h4>988 Suicide & Crisis Lifeline</h4>
+                                <a href="tel:988" class="helpline-number">988</a>
+                                <p>24/7 confidential support - Call or text</p>
+                                <div class="helpline-actions">
+                                    <a href="tel:988" class="btn btn--primary">Call Now</a>
+                                    <a href="sms:988" class="btn btn--outline">Text Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="helpline-card card">
+                            <div class="card__body">
+                                <h4>Crisis Text Line</h4>
+                                <a href="sms:741741?body=HOME" class="helpline-number">741741</a>
+                                <p>Text HOME to 741741 - Anonymous crisis counseling</p>
+                                <div class="helpline-actions">
+                                    <a href="sms:741741?body=HOME" class="btn btn--primary">Text Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="helpline-category">
+                        <h3>India</h3>
+                        <div class="helpline-card card">
+                            <div class="card__body">
+                                <h4>Tele-MANAS</h4>
+                                <a href="tel:14416" class="helpline-number">14416</a>
+                                <p>Mental health support, Government helpline</p>
+                                <div class="helpline-actions">
+                                    <a href="tel:14416" class="btn btn--primary">Call Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="helpline-card card">
+                            <div class="card__body">
+                                <h4>KIRAN Mental Health</h4>
+                                <a href="tel:18005990019" class="helpline-number">1800-599-0019</a>
+                                <p>24/7 support in 13 languages</p>
+                                <div class="helpline-actions">
+                                    <a href="tel:18005990019" class="btn btn--primary">Call Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="helpline-card card">
+                            <div class="card__body">
+                                <h4>Vandrevala Foundation</h4>
+                                <a href="tel:9999666555" class="helpline-number">9999666555</a>
+                                <p>Crisis intervention, WhatsApp available</p>
+                                <div class="helpline-actions">
+                                    <a href="tel:9999666555" class="btn btn--primary">Call Now</a>
+                                    <a href="https://wa.me/919999666555" target="_blank" class="btn btn--outline">WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="helpline-card card">
+                            <div class="card__body">
+                                <h4>AASRA</h4>
+                                <a href="tel:9820466728" class="helpline-number">9820466728</a>
+                                <p>Emotional support & counselling</p>
+                                <div class="helpline-actions">
+                                    <a href="tel:9820466728" class="btn btn--primary">Call Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="helpline-card card">
+                            <div class="card__body">
+                                <h4>One Life</h4>
+                                <a href="tel:7893078930" class="helpline-number">78930-78930</a>
+                                <p>Suicide prevention & crisis support</p>
+                                <div class="helpline-actions">
+                                    <a href="tel:7893078930" class="btn btn--primary">Call Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="helpline-card card">
+                            <div class="card__body">
+                                <h4>Mann Talks</h4>
+                                <a href="tel:8686139139" class="helpline-number">8686139139</a>
+                                <p>Counselling support</p>
+                                <div class="helpline-actions">
+                                    <a href="tel:8686139139" class="btn btn--primary">Call Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Planning -->
+                <div class="safety-planning card">
+                    <div class="card__body">
+                        <h2>Create Your Safety Plan</h2>
+                        <div class="safety-steps">
+                            <div class="safety-step">
+                                <h4>1. Warning Signs</h4>
+                                <p>Identify thoughts, feelings, or situations that might lead to a crisis</p>
+                                <textarea class="form-control" placeholder="Write your personal warning signs..." rows="2"></textarea>
+                            </div>
+                            <div class="safety-step">
+                                <h4>2. Coping Strategies</h4>
+                                <p>Things you can do on your own to feel better</p>
+                                <textarea class="form-control" placeholder="List your coping strategies..." rows="2"></textarea>
+                            </div>
+                            <div class="safety-step">
+                                <h4>3. Support Contacts</h4>
+                                <p>People you can talk to when you need help</p>
+                                <textarea class="form-control" placeholder="List trusted friends, family, or professionals..." rows="2"></textarea>
+                            </div>
+                            <div class="safety-step">
+                                <h4>4. Emergency Contacts</h4>
+                                <p>Professional help and crisis lines</p>
+                                <div class="emergency-contacts">
+                                    <div>988 - Crisis Lifeline (US)</div>
+                                    <div>14416 - Tele-MANAS (India)</div>
+                                    <div>741741 - Crisis Text Line</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary mt-16">Save Safety Plan</button>
+                    </div>
+                </div>
+
+                <!-- Crisis Action Plan -->
+                <div class="crisis-action-plan card">
+                    <div class="card__body">
+                        <h3>Immediate Crisis Action Steps</h3>
+                        <ol class="action-steps">
+                            <li><strong>Get to a safe place</strong> - Remove yourself from immediate danger</li>
+                            <li><strong>Call for help</strong> - Use the numbers above or call emergency services</li>
+                            <li><strong>Stay with someone</strong> - Don't be alone if possible</li>
+                            <li><strong>Remove harmful objects</strong> - Put away anything that could cause harm</li>
+                            <li><strong>Use coping strategies</strong> - Try breathing exercises or grounding techniques</li>
+                            <li><strong>Follow up with professional help</strong> - Make an appointment as soon as possible</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Warning Signs -->
+                <div class="warning-signs card">
+                    <div class="card__body">
+                        <h3>Warning Signs to Watch For</h3>
+                        <div class="warning-categories">
+                            <div class="warning-category">
+                                <h4>Emotional Signs</h4>
+                                <ul>
+                                    <li>Persistent sadness lasting more than 2 weeks</li>
+                                    <li>Feeling hopeless or worthless</li>
+                                    <li>Overwhelming anxiety or panic attacks</li>
+                                    <li>Extreme mood swings</li>
+                                </ul>
+                            </div>
+                            <div class="warning-category">
+                                <h4>Behavioral Signs</h4>
+                                <ul>
+                                    <li>Thoughts of self-harm or suicide</li>
+                                    <li>Withdrawing from friends and activities</li>
+                                    <li>Significant changes in sleep or appetite</li>
+                                    <li>Substance use as coping mechanism</li>
+                                </ul>
+                            </div>
+                            <div class="warning-category">
+                                <h4>Physical Signs</h4>
+                                <ul>
+                                    <li>Unexplained aches and pains</li>
+                                    <li>Extreme fatigue or insomnia</li>
+                                    <li>Difficulty concentrating</li>
+                                    <li>Changes in personal hygiene</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Wellness Section -->
+        <section id="wellness" class="section">
+            <div class="container">
+                <h1>Daily Wellness</h1>
+                <p class="section-intro">Build mental resilience with these 5 evidence-based steps to wellbeing</p>
+
+                <!-- 5 Steps to Wellbeing -->
+                <div class="wellness-steps">
+                    <div class="wellness-step card">
+                        <div class="card__body">
+                            <div class="step-number">1</div>
+                            <h3>Connect</h3>
+                            <p>Spend time with people you care about. Social connections are vital for mental health.</p>
+                            <ul>
+                                <li>Have meaningful conversations face-to-face</li>
+                                <li>Join groups or activities you enjoy</li>
+                                <li>Reach out to friends and family regularly</li>
+                                <li>Be present when you're with others</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="wellness-step card">
+                        <div class="card__body">
+                            <div class="step-number">2</div>
+                            <h3>Be Active</h3>
+                            <p>Physical activity boosts mood and reduces stress. Find activities you enjoy.</p>
+                            <ul>
+                                <li>Aim for 20-30 minutes of activity daily</li>
+                                <li>Try walking, dancing, sports, or yoga</li>
+                                <li>Start small and build up gradually</li>
+                                <li>Exercise with friends for motivation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="wellness-step card">
+                        <div class="card__body">
+                            <div class="step-number">3</div>
+                            <h3>Keep Learning</h3>
+                            <p>Learning new skills builds confidence and provides a sense of accomplishment.</p>
+                            <ul>
+                                <li>Try a new hobby or creative activity</li>
+                                <li>Read books or listen to podcasts</li>
+                                <li>Take online courses in subjects you're curious about</li>
+                                <li>Learn from your mistakes and challenges</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="wellness-step card">
+                        <div class="card__body">
+                            <div class="step-number">4</div>
+                            <h3>Give to Others</h3>
+                            <p>Helping others creates positive feelings and strengthens community connections.</p>
+                            <ul>
+                                <li>Volunteer for causes you care about</li>
+                                <li>Help friends, family, or neighbors</li>
+                                <li>Practice random acts of kindness</li>
+                                <li>Share your skills and knowledge</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="wellness-step card">
+                        <div class="card__body">
+                            <div class="step-number">5</div>
+                            <h3>Take Notice</h3>
+                            <p>Practice mindfulness and be present in the moment. Notice the good things around you.</p>
+                            <ul>
+                                <li>Practice gratitude daily</li>
+                                <li>Spend time in nature</li>
+                                <li>Use mindfulness and meditation techniques</li>
+                                <li>Pay attention to your surroundings and feelings</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Habits Tracker -->
+                <div class="habits-tracker card">
+                    <div class="card__body">
+                        <h2>Daily Wellness Tracker</h2>
+                        <p>Check off completed activities to build healthy habits</p>
+                        
+                        <div class="habits-grid">
+                            <div class="habit-category">
+                                <h3>Physical Health</h3>
+                                <div class="habits-list">
+                                    <label class="habit-item">
+                                        <input type="checkbox" class="habit-checkbox">
+                                        <span>Got 7-9 hours of sleep</span>
+                                    </label>
+                                    <label class="habit-item">
+                                        <input type="checkbox" class="habit-checkbox">
+                                        <span>Ate balanced meals</span>
+                                    </label>
+                                    <label class="habit-item">
+                                        <input type="checkbox" class="habit-checkbox">
+                                        <span>Did physical activity (20+ minutes)</span>
+                                    </label>
+                                    <label class="habit-item">
+                                        <input type="checkbox" class="habit-checkbox">
+                                        <span>Stayed hydrated (6+ glasses water)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="habit-category">
+                                <h3>Mental Health</h3>
+                                <div class="habits-list">
+                                    <label class="habit-item">
+                                        <input type="checkbox" class="habit-checkbox">
+                                        <span>Practiced mindfulness or meditation</span>
+                                    </label>
+                                    <label class="habit-item">
+                                        <input type="checkbox" class="habit-checkbox">
+                                        <span>Connected with friends/family</span>
+                                    </label>
+                                    <label class="habit-item">
+                                        <input type="checkbox" class="habit-checkbox">
+                                        <span>Practiced gratitude</span>
+                                    </label>
+                                    <label class="habit-item">
+                                        <input type="checkbox" class="habit-checkbox">
+                                        <span>Limited screen time before bed</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="habits-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <p class="progress-text" id="progressText">Complete your daily wellness activities!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coping Strategies Section -->
+        <section id="coping" class="section">
+            <div class="container">
+                <h1>Coping Strategies</h1>
+                <p class="section-intro">Learn practical techniques to manage stress, anxiety, and difficult emotions</p>
+
+                <!-- Interactive Breathing Exercises -->
+                <div class="breathing-exercises">
+                    <h2>🫁 Interactive Breathing Exercises</h2>
+                    <div class="breathing-cards">
+                        <div class="breathing-card card">
+                            <div class="card__body">
+                                <h3>Box Breathing</h3>
+                                <p>Breathe in for 4, hold for 4, exhale for 4, hold for 4</p>
+                                <div class="exercise-benefits">
+                                    <span class="benefit-tag">Reduces anxiety</span>
+                                    <span class="benefit-tag">Improves focus</span>
+                                </div>
+                                <button class="btn btn--primary start-breathing" data-exercise="box">Start Exercise</button>
+                            </div>
+                        </div>
+                        <div class="breathing-card card">
+                            <div class="card__body">
+                                <h3>Belly Breathing</h3>
+                                <p>Deep breathing focusing on stomach expansion</p>
+                                <div class="exercise-benefits">
+                                    <span class="benefit-tag">Promotes relaxation</span>
+                                    <span class="benefit-tag">Reduces stress</span>
+                                </div>
+                                <button class="btn btn--primary start-breathing" data-exercise="belly">Start Exercise</button>
+                            </div>
+                        </div>
+                        <div class="breathing-card card">
+                            <div class="card__body">
+                                <h3>5-Finger Breathing</h3>
+                                <p>Trace your hand while breathing</p>
+                                <div class="exercise-benefits">
+                                    <span class="benefit-tag">Easy to do anywhere</span>
+                                    <span class="benefit-tag">Provides focus</span>
+                                </div>
+                                <button class="btn btn--primary start-breathing" data-exercise="finger">Start Exercise</button>
+                            </div>
+                        </div>
+                        <div class="breathing-card card">
+                            <div class="card__body">
+                                <h3>Flower & Candle</h3>
+                                <p>Smell the flower, blow out the candle</p>
+                                <div class="exercise-benefits">
+                                    <span class="benefit-tag">Child-friendly</span>
+                                    <span class="benefit-tag">Calming imagery</span>
+                                </div>
+                                <button class="btn btn--primary start-breathing" data-exercise="flower">Start Exercise</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mindfulness Activities -->
+                <div class="mindfulness-activities">
+                    <h2>🧘 Interactive Mindfulness Activities</h2>
+                    <div class="mindfulness-cards">
+                        <div class="mindfulness-card card" id="groundingCard">
+                            <div class="card__body">
+                                <h3>5-4-3-2-1 Grounding</h3>
+                                <p>Use your senses to ground yourself in the present moment</p>
+                                <button class="btn btn--primary" id="startGrounding">Start Grounding</button>
+                                <div class="grounding-exercise hidden" id="groundingExercise">
+                                    <div class="grounding-step active" id="step5">
+                                        <h4>👁️ 5 things you can see</h4>
+                                        <p>Look around and name 5 things you can see</p>
+                                        <button class="btn btn--sm btn--outline" onclick="nextGroundingStep()">Next</button>
+                                    </div>
+                                    <div class="grounding-step" id="step4">
+                                        <h4>✋ 4 things you can touch</h4>
+                                        <p>Feel 4 different textures around you</p>
+                                        <button class="btn btn--sm btn--outline" onclick="nextGroundingStep()">Next</button>
+                                    </div>
+                                    <div class="grounding-step" id="step3">
+                                        <h4>👂 3 things you can hear</h4>
+                                        <p>Listen carefully and identify 3 sounds</p>
+                                        <button class="btn btn--sm btn--outline" onclick="nextGroundingStep()">Next</button>
+                                    </div>
+                                    <div class="grounding-step" id="step2">
+                                        <h4>👃 2 things you can smell</h4>
+                                        <p>Notice 2 scents in your environment</p>
+                                        <button class="btn btn--sm btn--outline" onclick="nextGroundingStep()">Next</button>
+                                    </div>
+                                    <div class="grounding-step" id="step1">
+                                        <h4>👅 1 thing you can taste</h4>
+                                        <p>Notice any taste in your mouth</p>
+                                        <button class="btn btn--sm btn--outline" onclick="completeGrounding()">Complete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mindfulness-card card">
+                            <div class="card__body">
+                                <h3>Body Scan</h3>
+                                <p>Mentally check in with each part of your body</p>
+                                <div class="body-scan-steps">
+                                    <div>1. Start with your toes - notice sensations</div>
+                                    <div>2. Move up through feet, calves, thighs</div>
+                                    <div>3. Notice abdomen, chest, arms</div>
+                                    <div>4. Check shoulders, neck, head</div>
+                                    <div>5. Observe without trying to change anything</div>
+                                </div>
+                                <button class="btn btn--primary" id="startBodyScan">Start Body Scan</button>
+                            </div>
+                        </div>
+
+                        <div class="mindfulness-card card">
+                            <div class="card__body">
+                                <h3>Mindful Walking</h3>
+                                <p>Pay attention to each step and your surroundings</p>
+                                <div class="walking-instructions">
+                                    <div>• Walk slowly and deliberately</div>
+                                    <div>• Feel each step as foot touches ground</div>
+                                    <div>• Notice leg and arm movement</div>
+                                    <div>• Observe surroundings without judgment</div>
+                                </div>
+                                <button class="btn btn--primary">Try Mindful Walking</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stress Management by Category -->
+                <div class="stress-management">
+                    <h2>📚 Stress Management by Category</h2>
+                    <div class="stress-categories">
+                        <div class="stress-category card">
+                            <div class="card__body">
+                                <h3>Academic Stress</h3>
+                                <div class="strategies">
+                                    <div class="strategy">
+                                        <h4>Time Management</h4>
+                                        <ul>
+                                            <li>Create daily schedules and use planners</li>
+                                            <li>Use Pomodoro technique (25 min work, 5 min break)</li>
+                                            <li>Break large tasks into smaller steps</li>
+                                            <li>Set realistic, achievable goals</li>
+                                        </ul>
+                                    </div>
+                                    <div class="strategy">
+                                        <h4>Study Techniques</h4>
+                                        <ul>
+                                            <li>Take regular breaks during study sessions</li>
+                                            <li>Use active recall and spaced repetition</li>
+                                            <li>Create study groups for support</li>
+                                            <li>Find your optimal learning environment</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stress-category card">
+                            <div class="card__body">
+                                <h3>Social Stress</h3>
+                                <div class="strategies">
+                                    <div class="strategy">
+                                        <h4>Communication Skills</h4>
+                                        <ul>
+                                            <li>Use "I" statements to express feelings</li>
+                                            <li>Practice active listening</li>
+                                            <li>Be specific about your needs</li>
+                                            <li>Learn assertiveness techniques</li>
+                                        </ul>
+                                    </div>
+                                    <div class="strategy">
+                                        <h4>Boundary Setting</h4>
+                                        <ul>
+                                            <li>Know your limits and communicate them</li>
+                                            <li>Be clear and direct when saying no</li>
+                                            <li>Offer alternatives when appropriate</li>
+                                            <li>Don't justify every decision</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stress-category card">
+                            <div class="card__body">
+                                <h3>Technology Balance</h3>
+                                <div class="strategies">
+                                    <div class="strategy">
+                                        <h4>Digital Detox</h4>
+                                        <ul>
+                                            <li>Set specific offline times daily</li>
+                                            <li>Use app timers to limit usage</li>
+                                            <li>Create phone-free zones at home</li>
+                                            <li>Find engaging offline hobbies</li>
+                                        </ul>
+                                    </div>
+                                    <div class="strategy">
+                                        <h4>Mindful Social Media</h4>
+                                        <ul>
+                                            <li>Unfollow accounts that cause negativity</li>
+                                            <li>Limit comparison with others</li>
+                                            <li>Share positivity and kindness</li>
+                                            <li>Remember: social media shows highlight reels</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breathing Exercise Modal -->
+        <div class="modal hidden" id="breathingModal">
+            <div class="modal-content">
+                <button class="modal-close" id="closeBreathing">&times;</button>
+                <h3 id="exerciseTitle">Breathing Exercise</h3>
+                <div class="breathing-visual">
+                    <div class="breathing-circle" id="breathingCircle"></div>
+                    <div class="breathing-instruction" id="breathingInstruction">Get Ready...</div>
+                    <div class="breathing-count" id="breathingCount">4</div>
+                </div>
+                <div class="breathing-controls">
+                    <button class="btn btn--primary" id="startBreathingBtn">Start</button>
+                    <button class="btn btn--outline" id="pauseBreathingBtn">Pause</button>
+                    <button class="btn btn--outline" id="resetBreathingBtn">Reset</button>
+                </div>
+                <div class="breathing-progress">
+                    <span>Round: <span id="breathingRound">0</span>/5</span>
+                    <div class="progress-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Help Section -->
+        <section id="professional" class="section">
+            <div class="container">
+                <h1>Professional Help</h1>
+                <p class="section-intro">Understanding when and how to seek professional mental health support</p>
+
+                <!-- When to Seek Help -->
+                <div class="seek-help card">
+                    <div class="card__body">
+                        <h2>When to Seek Professional Help</h2>
+                        <p>It's time to reach out to a professional if you're experiencing:</p>
+                        
+                        <div class="warning-signs-grid">
+                            <div class="warning-sign moderate">
+                                <div class="severity-badge moderate">Moderate</div>
+                                <h4>Persistent sadness or hopelessness</h4>
+                                <p>Lasting more than 2 weeks</p>
+                            </div>
+                            <div class="warning-sign moderate">
+                                <div class="severity-badge moderate">Moderate</div>
+                                <h4>Anxiety interfering with daily activities</h4>
+                                <p>Ongoing difficulty functioning</p>
+                            </div>
+                            <div class="warning-sign high">
+                                <div class="severity-badge high">High Priority</div>
+                                <h4>Thoughts of self-harm or suicide</h4>
+                                <p>Any occurrence requires immediate help</p>
+                            </div>
+                            <div class="warning-sign moderate">
+                                <div class="severity-badge moderate">Moderate</div>
+                                <h4>Significant behavioral changes</h4>
+                                <p>Changes in sleep, appetite, social withdrawal</p>
+                            </div>
+                            <div class="warning-sign high">
+                                <div class="severity-badge high">High Priority</div>
+                                <h4>Substance use as coping mechanism</h4>
+                                <p>Regular use to cope with feelings</p>
+                            </div>
+                            <div class="warning-sign moderate">
+                                <div class="severity-badge moderate">Moderate</div>
+                                <h4>Difficulty functioning</h4>
+                                <p>Grades dropping, isolating from friends</p>
+                            </div>
+                        </div>
+                        
+                        <div class="help-note">
+                            <strong>Remember:</strong> Seeking help is a sign of strength, not weakness. Early intervention leads to better outcomes.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Types of Professionals -->
+                <div class="professionals-section">
+                    <h2>Types of Mental Health Professionals</h2>
+                    <div class="professionals-grid">
+                        <div class="professional-card card">
+                            <div class="card__body">
+                                <div class="professional-icon">🏫</div>
+                                <h3>School Counselors</h3>
+                                <p><strong>Best for:</strong> First point of contact for students, academic stress, peer issues</p>
+                                <div class="professional-details">
+                                    <h4>Benefits:</h4>
+                                    <ul>
+                                        <li>Free and easily accessible</li>
+                                        <li>Understand school environment</li>
+                                        <li>Can coordinate with teachers</li>
+                                        <li>Familiar with academic pressures</li>
+                                    </ul>
+                                </div>
+                                <div class="professional-benefits">
+                                    <span class="status status--success">Free</span>
+                                    <span class="status status--info">Accessible</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="professional-card card">
+                            <div class="card__body">
+                                <div class="professional-icon">🧠</div>
+                                <h3>Clinical Psychologists</h3>
+                                <p><strong>Best for:</strong> Ongoing mental health concerns, anxiety, depression, trauma</p>
+                                <div class="professional-details">
+                                    <h4>Benefits:</h4>
+                                    <ul>
+                                        <li>Specialized training in therapy</li>
+                                        <li>Various therapy approaches available</li>
+                                        <li>Long-term support and treatment</li>
+                                        <li>Evidence-based treatment methods</li>
+                                    </ul>
+                                </div>
+                                <div class="professional-benefits">
+                                    <span class="status status--info">Therapy</span>
+                                    <span class="status status--info">Long-term</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="professional-card card">
+                            <div class="card__body">
+                                <div class="professional-icon">⚕️</div>
+                                <h3>Psychiatrists</h3>
+                                <p><strong>Best for:</strong> When therapy alone isn't enough, severe symptoms, medication evaluation</p>
+                                <div class="professional-details">
+                                    <h4>Benefits:</h4>
+                                    <ul>
+                                        <li>Medical training and expertise</li>
+                                        <li>Can prescribe medication</li>
+                                        <li>Treat complex conditions</li>
+                                        <li>Work with other medical professionals</li>
+                                    </ul>
+                                </div>
+                                <div class="professional-benefits">
+                                    <span class="status status--info">Medication</span>
+                                    <span class="status status--info">Medical Care</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="professional-card card">
+                            <div class="card__body">
+                                <div class="professional-icon">🤝</div>
+                                <h3>Social Workers</h3>
+                                <p><strong>Best for:</strong> Need community services, family issues, practical support</p>
+                                <div class="professional-details">
+                                    <h4>Benefits:</h4>
+                                    <ul>
+                                        <li>Community connections and resources</li>
+                                        <li>Family systems approach</li>
+                                        <li>Help navigate services</li>
+                                        <li>Crisis intervention skills</li>
+                                    </ul>
+                                </div>
+                                <div class="professional-benefits">
+                                    <span class="status status--info">Resources</span>
+                                    <span class="status status--info">Family Support</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="professional-card card">
+                            <div class="card__body">
+                                <div class="professional-icon">👥</div>
+                                <h3>Peer Counselors</h3>
+                                <p><strong>Best for:</strong> Want to talk to someone who understands your age group and experiences</p>
+                                <div class="professional-details">
+                                    <h4>Benefits:</h4>
+                                    <ul>
+                                        <li>Peer understanding and relatability</li>
+                                        <li>Shared experiences and challenges</li>
+                                        <li>Less intimidating than traditional therapy</li>
+                                        <li>Bridge to professional help</li>
+                                    </ul>
+                                </div>
+                                <div class="professional-benefits">
+                                    <span class="status status--success">Relatable</span>
+                                    <span class="status status--info">Peer Support</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Online Resources -->
+                <div class="online-resources card">
+                    <div class="card__body">
+                        <h2>Online Resources & Apps</h2>
+                        <div class="resource-categories">
+                            <div class="resource-category">
+                                <h3>🖥️ Therapy & Counseling</h3>
+                                <ul>
+                                    <li><strong>BetterHelp:</strong> Online therapy platform with licensed therapists</li>
+                                    <li><strong>Talkspace:</strong> Text-based therapy and counseling</li>
+                                    <li><strong>MDLIVE:</strong> Video therapy sessions with professionals</li>
+                                    <li><strong>TeenCounseling:</strong> Specifically designed for teens</li>
+                                </ul>
+                            </div>
+                            <div class="resource-category">
+                                <h3>📱 Mental Health Apps</h3>
+                                <ul>
+                                    <li><strong>Headspace:</strong> Meditation and mindfulness exercises</li>
+                                    <li><strong>Calm:</strong> Sleep stories and relaxation techniques</li>
+                                    <li><strong>Sanvello:</strong> Mood and anxiety tracking with coping tools</li>
+                                    <li><strong>MindShift:</strong> Anxiety management for teens and young adults</li>
+                                </ul>
+                            </div>
+                            <div class="resource-category">
+                                <h3>📚 Educational Resources</h3>
+                                <ul>
+                                    <li><strong>NAMI:</strong> National Alliance on Mental Illness</li>
+                                    <li><strong>Mental Health America:</strong> Comprehensive mental health info</li>
+                                    <li><strong>Teen Mental Health:</strong> Youth-focused resources and support</li>
+                                    <li><strong>Active Minds:</strong> Mental health awareness for students</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Family Communication -->
+                <div class="family-support card">
+                    <div class="card__body">
+                        <h2>Talking to Family About Mental Health</h2>
+                        <div class="conversation-guide">
+                            <div class="conversation-tips">
+                                <h3>Tips for Starting the Conversation:</h3>
+                                <div class="tips-grid">
+                                    <div class="tip">
+                                        <div class="tip-icon">🕐</div>
+                                        <div>
+                                            <h4>Choose the Right Time</h4>
+                                            <p>Pick a calm, private moment when you won't be interrupted</p>
+                                        </div>
+                                    </div>
+                                    <div class="tip">
+                                        <div class="tip-icon">💬</div>
+                                        <div>
+                                            <h4>Be Honest</h4>
+                                            <p>Share how you're really feeling and what you're experiencing</p>
+                                        </div>
+                                    </div>
+                                    <div class="tip">
+                                        <div class="tip-icon">🩺</div>
+                                        <div>
+                                            <h4>Compare to Physical Health</h4>
+                                            <p>Explain that mental health is just as important as physical health</p>
+                                        </div>
+                                    </div>
+                                    <div class="tip">
+                                        <div class="tip-icon">📝</div>
+                                        <div>
+                                            <h4>Give Specific Examples</h4>
+                                            <p>Share concrete examples of how you've been affected</p>
+                                        </div>
+                                    </div>
+                                    <div class="tip">
+                                        <div class="tip-icon">🤝</div>
+                                        <div>
+                                            <h4>Ask for Support</h4>
+                                            <p>Request their help in finding professional support</p>
+                                        </div>
+                                    </div>
+                                    <div class="tip">
+                                        <div class="tip-icon">⏳</div>
+                                        <div>
+                                            <h4>Be Patient</h4>
+                                            <p>They may need time to understand and process</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="conversation-starters">
+                                <h3>Example Conversation Starters:</h3>
+                                <div class="starter-examples">
+                                    <blockquote>
+                                        "I've been struggling with my mental health lately, and I think I could benefit from talking to someone professional. Can we look into finding a counselor or therapist together?"
+                                    </blockquote>
+                                    <blockquote>
+                                        "I've been feeling really anxious/sad lately, and it's affecting my school and friendships. I'd like to talk to someone who can help me learn better coping strategies."
+                                    </blockquote>
+                                    <blockquote>
+                                        "I know you care about my well-being. I've been having a hard time mentally, and I think professional support would be really helpful right now."
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h1>About MindWell</h1>
+                
+                <div class="about-content">
+                    <div class="about-hero card">
+                        <div class="card__body">
+                            <h2>Your AI-Powered Mental Wellness Companion</h2>
+                            <p class="about-intro">MindWell combines the latest in artificial intelligence with evidence-based mental health resources to provide personalized, accessible support for teens and young adults aged 13-25.</p>
+                        </div>
+                    </div>
+
+                    <div class="about-mission card">
+                        <div class="card__body">
+                            <h2>Our Mission</h2>
+                            <p>To make mental health support accessible, personalized, and available 24/7 for young people. We believe that everyone deserves to have their mental health needs met, regardless of their circumstances, location, or background.</p>
+                            <div class="mission-stats">
+                                <div class="stat">
+                                    <div class="stat-number">24/7</div>
+                                    <div class="stat-label">AI Support Available</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">100+</div>
+                                    <div class="stat-label">Coping Resources</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">8</div>
+                                    <div class="stat-label">Crisis Helplines</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-features card">
+                        <div class="card__body">
+                            <h2>Platform Features</h2>
+                            <div class="features-grid">
+                                <div class="feature">
+                                    <div class="feature-icon">🤖</div>
+                                    <h3>AI Chatbot Support</h3>
+                                    <p>Empathetic AI companion that provides personalized responses, crisis detection, and resource recommendations based on your needs.</p>
+                                </div>
+                                <div class="feature">
+                                    <div class="feature-icon">🚨</div>
+                                    <h3>Crisis Detection</h3>
+                                    <p>Real-time monitoring for crisis keywords with immediate access to professional help and safety resources.</p>
+                                </div>
+                                <div class="feature">
+                                    <div class="feature-icon">🫁</div>
+                                    <h3>Interactive Tools</h3>
+                                    <p>Guided breathing exercises, mindfulness activities, and wellness tracking tools you can use anytime.</p>
+                                </div>
+                                <div class="feature">
+                                    <div class="feature-icon">📚</div>
+                                    <h3>Educational Resources</h3>
+                                    <p>Comprehensive library of mental health information, coping strategies, and professional help guidance.</p>
+                                </div>
+                                <div class="feature">
+                                    <div class="feature-icon">📞</div>
+                                    <h3>Crisis Helplines</h3>
+                                    <p>Immediate access to crisis support lines in the US and India with one-click calling and texting.</p>
+                                </div>
+                                <div class="feature">
+                                    <div class="feature-icon">📱</div>
+                                    <h3>Mobile Optimized</h3>
+                                    <p>Fully responsive design that works seamlessly on phones, tablets, and computers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-values card">
+                        <div class="card__body">
+                            <h2>Our Core Values</h2>
+                            <div class="values-grid">
+                                <div class="value">
+                                    <h3>🤝 Accessibility</h3>
+                                    <p>Mental health resources should be free and available to all young people, regardless of their circumstances.</p>
+                                </div>
+                                <div class="value">
+                                    <h3>🧠 Evidence-Based</h3>
+                                    <p>All our resources are grounded in scientific research and clinical best practices for mental health.</p>
+                                </div>
+                                <div class="value">
+                                    <h3>❤️ Non-Judgmental</h3>
+                                    <p>We provide a safe, supportive space where all young people are accepted and validated.</p>
+                                </div>
+                                <div class="value">
+                                    <h3>🌟 Empowerment</h3>
+                                    <p>We believe in building resilience, self-advocacy skills, and empowering young people to take control of their mental health.</p>
+                                </div>
+                                <div class="value">
+                                    <h3>🔒 Privacy-First</h3>
+                                    <p>Your conversations and data are private and secure. We prioritize your confidentiality and trust.</p>
+                                </div>
+                                <div class="value">
+                                    <h3>🎯 Personalized</h3>
+                                    <p>Our AI learns from your interactions to provide increasingly personalized support and recommendations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-ai card">
+                        <div class="card__body">
+                            <h2>About Our AI Companion</h2>
+                            <div class="ai-details">
+                                <div class="ai-feature">
+                                    <h3>🧠 Empathetic Responses</h3>
+                                    <p>Our AI is trained to provide supportive, validating responses that acknowledge your feelings and experiences.</p>
+                                </div>
+                                <div class="ai-feature">
+                                    <h3>🚨 Crisis Detection</h3>
+                                    <p>Advanced keyword monitoring to identify when someone may be in crisis and provide immediate resources.</p>
+                                </div>
+                                <div class="ai-feature">
+                                    <h3>🎯 Personalized Recommendations</h3>
+                                    <p>Based on your conversations, the AI suggests relevant coping strategies and resources tailored to your needs.</p>
+                                </div>
+                                <div class="ai-feature">
+                                    <h3>🔒 Safe Boundaries</h3>
+                                    <p>The AI is programmed to know its limits and will always refer you to professional help when appropriate.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-disclaimer card">
+                        <div class="card__body">
+                            <h2>Important Disclaimer</h2>
+                            <div class="disclaimer-content">
+                                <div class="disclaimer-warning">
+                                    <h3>⚠️ Not a Replacement for Professional Care</h3>
+                                    <p><strong>MindWell is not a substitute for professional mental health care.</strong> While our AI companion and resources can be helpful supplements to professional treatment, they should never replace therapy, counseling, or medical care when needed.</p>
+                                </div>
+                                
+                                <div class="disclaimer-crisis">
+                                    <h3>🆘 Crisis Situations</h3>
+                                    <p>If you're experiencing a mental health crisis, thoughts of self-harm, or suicidal ideation, please contact emergency services or use the crisis resources provided on this site immediately. Don't wait.</p>
+                                </div>
+                                
+                                <div class="disclaimer-privacy">
+                                    <h3>🔐 Privacy & Data</h3>
+                                    <p>Your conversations with our AI are processed to provide personalized responses but are not stored permanently. However, for crisis situations, we may prioritize your safety over privacy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mental-health-facts card">
+                        <div class="card__body">
+                            <h2>Mental Health Facts</h2>
+                            <div class="facts-grid">
+                                <div class="fact">
+                                    <div class="fact-stat">1 in 5</div>
+                                    <h4>Young people experience a mental health challenge</h4>
+                                    <p>Mental health conditions are common and treatable. You're not alone.</p>
+                                </div>
+                                <div class="fact">
+                                    <div class="fact-stat">Early</div>
+                                    <h4>Intervention leads to better outcomes</h4>
+                                    <p>Getting help early is key to recovery and building long-term resilience.</p>
+                                </div>
+                                <div class="fact">
+                                    <div class="fact-stat">Equal</div>
+                                    <h4>Mental health = Physical health</h4>
+                                    <p>Both deserve care, attention, and professional support when needed.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="positive-affirmations card">
+                        <div class="card__body">
+                            <h2>Daily Affirmations</h2>
+                            <div class="affirmations-grid">
+                                <div class="affirmation">You are stronger than you think</div>
+                                <div class="affirmation">This feeling will pass</div>
+                                <div class="affirmation">You deserve kindness and support</div>
+                                <div class="affirmation">It's okay to ask for help</div>
+                                <div class="affirmation">Your feelings are valid</div>
+                                <div class="affirmation">You have the power to overcome challenges</div>
+                                <div class="affirmation">Every small step forward counts</div>
+                                <div class="affirmation">You are not alone in this journey</div>
+                                <div class="affirmation">You are worthy of love and care</div>
+                                <div class="affirmation">Healing takes time and that's okay</div>
+                                <div class="affirmation">Your mental health matters</div>
+                                <div class="affirmation">You can get through this difficult time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Emergency Resources</h4>
+                    <p>Crisis support is available 24/7</p>
+                    <div class="footer-links">
+                        <a href="tel:988">988 (US Crisis Line)</a>
+                        <a href="tel:14416">14416 (India Tele-MANAS)</a>
+                        <a href="sms:741741?body=HOME">Text HOME to 741741</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="#crisis">Crisis Resources</a>
+                        <a href="#wellness">Daily Wellness</a>
+                        <a href="#coping">Coping Strategies</a>
+                        <a href="#professional">Professional Help</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>AI Support</h4>
+                    <p>Our AI companion is available 24/7 for support, resources, and crisis detection.</p>
+                    <button class="btn btn--outline btn--sm" id="footerChatBtn">Start Chat</button>
+                </div>
+                <div class="footer-section">
+                    <h4>Remember</h4>
+                    <p>You are not alone. Help is available, recovery is possible, and your mental health matters.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MindWell AI. This platform provides educational resources and AI support but is not a substitute for professional mental health care. If you're in crisis, please seek immediate professional help.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
